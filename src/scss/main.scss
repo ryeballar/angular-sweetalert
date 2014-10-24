@@ -1,0 +1,39 @@
+// bower:scss
+@import "../bower_components/sweetalert/lib/sweet-alert.scss";
+// endbower
+
+@include keyframes(angularSweetalertPulseWarningIns) {
+	0%		{ background-color: #F8D486; }
+	100%	{ background-color: white; }
+}
+
+.angularSweetalertPulseWarningIns {
+	@include animation('angularSweetalertPulseWarningIns 1s infinite alternate');
+}
+
+@include keyframes(angularSweetalertOverlayShow) {
+	0% { 
+		opacity: 0.0; 
+	}
+	100% {
+		opacity: 0.75;
+	}
+}
+
+.angularSweetalertOverlayShow {
+	display: block !important;
+	@include animation('angularSweetalertOverlayShow 0.75s');
+}
+
+@include keyframes(angularSweetalertOverlayHide) {
+	0% { 
+		opacity: 0.75; 
+	}
+	100% {
+		opacity: 0;
+	}
+}
+
+.angularSweetalertOverlayHide {
+	@include animation('angularSweetalertOverlayHide 0.75s');
+}

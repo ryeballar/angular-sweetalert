@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="angular-sweetalert">
+<head>
+	<title></title>
+
+	<!-- bower:css -->
+	<!-- endbower -->
+
+	<link rel="stylesheet" href="css/main.css">
+
+</head>
+<body ng-controller="Ctrl">
+
+	<button type="button" ng-click="click()">Show</button>
+
+
+	<sweet-alert></sweet-alert>
+
+	<!-- bower:js -->
+	<script src="bower_components/angular/angular.js"></script>
+	<!-- endbower -->
+
+	<script src="js/angular-sweetalert.js"></script>
+
+	<script>
+		angular.module('angular-sweetalert')
+
+			.controller('Ctrl', function($scope, $q, sweetAlert) {
+
+				$scope.click = function() {
+					sweetAlert.info('Information Message', 'Bolaga')
+						.pipe(sweetAlert.button.confirm('Ok', function() {
+							return sweetAlert.close(true).then(function() {
+								var deferred = $q.defer();
+								deferred.resolve('Another Message`');
+								return deferred.promise;
+							});
+						})).finalize()
+
+						.then(function(message) {
+							return sweetAlert.warning('Information Message', message)
+								.pipe(sweetAlert.button.confirm('Ok', function() {
+									return sweetAlert.close(true).then(function() {
+										var deferred = $q.defer();
+										deferred.resolve('Last Message');
+										return deferred.promise;
+									});
+								})).finalize()
+						})
+
+						.then(function(message) {
+							return sweetAlert.error('Information Message', message)
+								.pipe(sweetAlert.button.confirm('Ok', function() {
+									return sweetAlert.close();
+								})).finalize()
+						});
+
+				};
+			});
+	</script>
+
+</body>
+</html>
